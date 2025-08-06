@@ -46,11 +46,10 @@ steps:
           Start-Process "cmd.exe" -ArgumentList "/c", "npx @puppeteer/browsers launch chrome -- $chromeArgs"
 
           Write-Host "Script complete."
-          Stop-Process -Name "cmd" -Force
           exit
       - command: wait-for-text
         text: ${TD_WEBSITE}
-        timeout: 60000
+        timeout: 120000
       - command: exec
         lang: pwsh
         code: |
