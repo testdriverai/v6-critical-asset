@@ -1,0 +1,4 @@
+*.code*
+.env.local
+.env.demo
+.env

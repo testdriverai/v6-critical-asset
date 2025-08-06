@@ -1,0 +1,28 @@
+version: 6.0.0
+session: sourceandsummitv6testing
+steps:
+  - prompt: "Provision"
+    commands:
+      - command: exec
+        lang: pwsh
+        code:
+          | # pull down files from drive or a github repo https://drive.google.com/file/d/1G-FEUF9AoC8cw6O1DwZSfcHl6peZDuHz/view?usp=drive_link
+          # Google Drive file ID from the shared link
+          $fileId = "1G-FEUF9AoC8cw6O1DwZSfcHl6peZDuHz"
+
+          # Desired filename (change if you want something custom)
+          $outputFileName = "image.png"
+
+          # Output path in Downloads folder
+          $downloadsPath = [Environment]::GetFolderPath("UserProfile") + "\Desktop"
+          $outputFilePath = Join-Path $downloadsPath "$outputFileName"
+
+          # Construct the Google Drive download URL
+          $downloadUrl = "https://drive.google.com/uc?export=download&id=$fileId"
+
+          # Perform the download
+          Invoke-WebRequest -Uri $downloadUrl -OutFile $outputFilePath
+
+          Write-Output "File downloaded to: $outputFilePath"
+
+          exit

@@ -1,0 +1,93 @@
+name: TestDriver CI Test Runner
+
+permissions:
+  contents: read
+  pull-requests: read
+
+on:
+  # for manual test runs - this allsws you to select a folder or file to run
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Test folder or single file to run (e.g. debug or /tests/test_case.yaml). Do not include the testdriver folder in the path."
+        required: false
+        default: "tests"
+  # uncomment this to select on push to main, brances, etc.
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #     - main
+  #   types:
+  #     - opened
+  #     - synchronize
+  #     - reopened
+
+jobs:
+  gather-test-files:
+    name: Gather Test Files
+    runs-on: ubuntu-latest
+    outputs:
+      test_files: ${{ steps.test_list.outputs.files }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find test files from folder or specific file
+        id: test_list
+        run: |
+          # get the file(s) to test
+          if [[ "${{ github.event.inputs.target }}" != "" ]]; then
+            target_path="testdriver/${{ github.event.inputs.target }}"
+          else
+            target_path="testdriver/tests"
+          fi
+
+          echo "📍 Target path: $target_path"
+
+          if [[ -f "$target_path" ]]; then
+            echo "✅ Detected single file input."
+            files="$target_path"
+          elif [[ -d "$target_path" ]]; then
+            echo "✅ Detected folder input. Searching for .yml and .yaml files..."
+            files=$(find "$target_path" \( -name '*.yml' -o -name '*.yaml' \) | sort -V)
+          else
+            echo "❌ Error: '$target_path' is not a valid file or folder."
+            exit 1
+          fi
+
+          if [[ -z "$files" ]]; then
+            echo "❌ No test files found in $target_path"
+            exit 1
+          fi
+
+          files_json=$(echo "$files" | jq -R -s -c 'split("\n") | map(select(. != "") | {path: ., name: (. | split("/")[-1])})')
+
+          echo "$files"
+          echo "files=$files_json" >> $GITHUB_OUTPUT
+
+  run-tests:
+    needs: gather-test-files
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        test: ${{ fromJson(needs.gather-test-files.outputs.test_files) }}
+      fail-fast: false
+    name: ${{ matrix.test.name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run TestDriver
+        # run the testdriver command with the test file for each file in the matrix
+        run: npx testdriverai@${{ env.TD_VERSION }} run ${{ matrix.test.path }}
+        env:
+          FORCE_COLOR: "3"
+          TD_TEST_USERNAME: ${{ secrets.TD_TEST_USERNAME }}
+          TD_TEST_PASSWORD: ${{ secrets.TD_TEST_PASSWORD }}
+          TD_API_KEY: ${{ secrets.TESTDRIVER_API_KEY }}
+          TD_WEBSITE: ${{ secrets.TD_WEBSITE }}
+          TD_THIS_FILE: ${{ matrix.test.name }}
+          TD_VERSION: "latest" # v6 is latest "6.0.11-canary.70bdb70.0"
