@@ -1,0 +1,451 @@
+      version: 6.0.11
+      session: 6893e4c820e694a171f77dc7
+      steps:
+        - prompt: '> navigate to {TD_WEBSITE}'
+          commands:
+            - command: type
+              text: '{TD_WEBSITE}'
+            - command: press-keys
+              keys:
+                - enter
+        - prompt: '- prompt: open Google Chrome'
+          commands:
+            - command: hover-text
+              text: Google Chrome
+              description: >-
+                Google Chrome shortcut icon on the desktop with the Chrome logo and
+                label
+              action: click
+        - prompt: '- prompt: open Google Chrome'
+          commands:
+            - command: hover-text
+              text: Google Chrome
+              description: >-
+                Google Chrome shortcut icon on the desktop with the Chrome logo and
+                label
+              action: click
+        - prompt: '- prompt: open Google Chrome'
+          commands:
+            - command: hover-text
+              text: Google Chrome
+              description: >-
+                Google Chrome shortcut icon on the desktop with the Chrome logo and
+                label
+              action: click
+        - prompt: '- prompt: open Google Chrome'
+          commands:
+            - command: hover-text
+              text: Type here to search
+              description: Windows search box in the bottom left of the taskbar
+              action: click
+            - command: type
+              text: Google Chrome
+            - command: wait
+              timeout: 1500
+            - command: press-keys
+              keys:
+                - enter
+        - prompt: '- prompt: search CriticalAsset.com on Chrome'
+          commands:
+            - command: type
+              text: CriticalAsset.com
+            - command: press-keys
+              keys:
+                - enter
+        - prompt: '- prompt: click on Log In button on top right side'
+          commands:
+            - command: focus-application
+              name: Google Chrome
+            - command: hover-text
+              text: Log In
+              description: Log In button at the top right of the CriticalAsset.com header
+              action: click
+        - prompt: '- prompt: in box of Email enter gopal@criticalasset.com'
+          commands:
+            - command: focus-application
+              name: Google Chrome
+            - command: hover-text
+              text: Email
+              description: Email input box placeholder on the CriticalAsset sign-in page
+              action: click
+            - command: type
+              text: gopal@criticalasset.com
+        - prompt: '- prompt: in box of password type {TD_TEST_PASSWORD}'
+          commands:
+            - command: focus-application
+              name: Google Chrome
+            - command: hover-text
+              text: Password
+              description: Password input box placeholder on the CriticalAsset sign-in page
+              action: click
+            - command: type
+              text: '{TD_TEST_PASSWORD}'
+        - prompt: '- prompt: in box of password type mh29AR@#0915'
+          commands:
+            - command: focus-application
+              name: Google Chrome
+            - command: hover-text
+              text: Password
+              description: Password input box placeholder on the CriticalAsset sign-in page
+              action: click
+            - command: type
+              text: mh29AR@#0915
+        - prompt: '- prompt: in box of password type mh29AR@#0915'
+          commands:
+            - command: focus-application
+              name: Google Chrome
+            - command: hover-text
+              text: Password
+              description: Password input box placeholder on the CriticalAsset sign-in page
+              action: click
+            - command: press-keys
+              keys:
+                - ctrl
+                - a
+            - command: press-keys
+              keys:
+                - backspace
+            - command: type
+              text: mh29AR@#0915
+        - prompt: '- prompt: Click on SIGN IN button shown in yellow color'
+          commands:
+            - command: focus-application
+              name: Google Chrome
+            - command: hover-text
+              text: SIGN IN
+              description: >-
+                Yellow SIGN IN button below the password field on the CriticalAsset
+                sign-in page
+              action: click
+        - prompt: send dashcam recording to server
+          commands:
+            - command: focus-application
+              name: Google Chrome
+            - command: hover-text
+              text: Never
+              description: >-
+                Blue Never button in the Google Password Manager prompt in the center
+                of the screen
+              action: click
+            - command: hover-text
+              text: Files
+              description: Files section in the left sidebar menu of the CriticalAsset dashboard
+              action: click
+
+New commands will be appended.
+> -prompt: open Google Chrome
+
+thinking...
+    I can see the "Google Chrome" shortcut icon clearly on the
+    desktop, which is the most direct way to open Google
+    Chrome. I will click on the "Google Chrome" text under the
+    icon to launch the browser.
+
+      commands:
+        - command: hover-text
+          text: "Google Chrome"
+          description: Google Chrome shortcut icon text on the desktop
+          action: click
+
+    This step will open Google Chrome as requested.
+
+command='hover-text' text='Google Chrome' description='Google Chrome shortcut icon text on the desktop' action='click'
+waiting for text: "Google Chrome"...
+"Google Chrome" found!
+thinking...
+command='click' x=37 y=180 action='click'
+checking...
+    Confidence: 20%
+
+    Reasoning: The screenshots show that the "Google Chrome"
+    shortcut on the desktop has been clicked (it is
+    highlighted and the cursor is on it), but there is no
+    evidence that Google Chrome has actually opened yet. The
+    active window is still undefined, and there is no Chrome
+    window visible on the desktop.
+
+    Next step: Wait a few seconds to allow Google Chrome to
+    launch, then check again.
+
+      commands:
+        - command: wait
+          timeout: 5000
+
+not done yet!
+command='wait' timeout=5000
+checking...
+    Confidence: 10%
+
+    Reasoning: The screenshot shows the desktop with the
+    "Google Chrome" shortcut highlighted and the mouse cursor
+    over it, but there is no indication that Google Chrome has
+    actually opened. The active window is still undefined, and
+    there is no Chrome window visible. It appears that the
+    shortcut has only been selected, not double-clicked or
+    launched.
+
+    Next step: Double-click the "Google Chrome" shortcut icon
+    to ensure the browser opens.
+
+      commands:
+        - command: hover-text
+          text: "Google Chrome"
+          description: Google Chrome shortcut icon text on the desktop
+          action: double-click
+
+not done yet!
+command='hover-text' text='Google Chrome' description='Google Chrome shortcut icon text on the desktop' action='double-click'
+waiting for text: "Google Chrome"...
+"Google Chrome" found!
+thinking...
+command='click' x=36 y=166 action='double-click'
+checking...
+    Confidence: 100%
+
+    Reasoning: The second screenshot clearly shows that Google
+    Chrome is open with a new tab displayed. The Chrome window
+    is visible and active on the desktop, confirming that the
+    task to open Google Chrome has been successfully
+    completed. No further action is required.
+
+success!
+> -prompt: search Criticalasset.com
+
+thinking...
+    I can see that Google Chrome is open and the address bar
+    at the top is empty and focused (blue outline). To search
+    for "Criticalasset.com", I will type the query and press
+    Enter.
+
+      commands:
+        - command: focus-application
+          name: "Google Chrome"
+        - command: type
+          text: "Criticalasset.com"
+        - command: press-keys
+          keys:
+            - "enter"
+
+command='focus-application' name='Google Chrome'
+command='type' text='Criticalasset.com'
+command='press-keys' keys=enter
+checking...
+    Confidence: 100%
+
+    Reasoning: The second screenshot clearly shows that the
+    browser is on the "criticalasset.com" website, with the
+    URL visible in the address bar and the CriticalAsset
+    homepage loaded. This confirms that the search for
+    "Criticalasset.com" was successful and the task is
+    complete. No further actions are needed.
+
+success!
+> -prompt: Click on "Log In" button on top right side
+
+thinking...
+    I can see the "Log In" button clearly at the top right
+    side of the CriticalAsset website in Google Chrome. The
+    button text is "Log In" and it is distinct and visible.
+    The next step is to click this button.
+
+      commands:
+        - command: focus-application
+          name: "Google Chrome"
+        - command: hover-text
+          text: "Log In"
+          description: Log In button on the top right of the CriticalAsset website header
+          action: click
+
+command='focus-application' name='Google Chrome'
+command='hover-text' text='Log In' description='Log In button on the top right of the CriticalAsset website header' action='click'
+waiting for text: "Log In"...
+"Log In" found!
+thinking...
+command='click' x=836 y=161 action='click'
+checking...
+    Confidence: 100%
+
+    Reasoning: The second screenshot shows that the browser
+    has navigated to app.criticalasset.com/sign-in/ in a new
+    tab, which is the expected result after clicking the "Log
+    In" button on the top right of the CriticalAsset homepage.
+    This confirms that the "Log In" button was successfully
+    clicked and the intended action was completed. No further
+    steps are needed.
+
+success!
+> -prompt: In Email box type "gopal@criticalasset.com"
+
+thinking...
+    I can see the login screen for CriticalAsset, with the
+    "Email" input box clearly visible and empty. The best way
+    to focus the email input is to click on the "Email"
+    placeholder text, then type the provided email address.
+
+      commands:
+        - command: focus-application
+          name: "Google Chrome"
+        - command: hover-text
+          text: "Email"
+          description: Email input placeholder above the password field on the login form
+          action: click
+        - command: type
+          text: "gopal@criticalasset.com"
+
+command='focus-application' name='Google Chrome'
+command='hover-text' text='Email' description='Email input placeholder above the password field on the login form' action='click'
+waiting for text: "Email"...
+"Email" found!
+thinking...
+command='click' x=588 y=316 action='click'
+command='type' text='gopal@criticalasset.com'
+checking...
+    Confidence: 0%
+
+    Reasoning: The screenshots show that the "Email" input box
+    is empty and the cursor is hovering over the "Email"
+    placeholder, but the email address "
+    gopal@criticalasset.com (mailto:gopal@criticalasset.com)"
+    has not been typed into the box yet. The task is not
+    complete.
+
+    Here is the next step to type the email address into the
+    Email box:
+
+      commands:
+        - command: type
+          text: "gopal@criticalasset.com"
+
+not done yet!
+command='type' text='gopal@criticalasset.com'
+checking...
+    Confidence: 0%
+
+    Reasoning: The attached screenshots show that the "Email"
+    input box is still empty and the cursor is hovering over
+    the "Email" placeholder. The email address "
+    gopal@criticalasset.com (mailto:gopal@criticalasset.com)"
+    has not been typed into the input box yet. The task is not
+    complete.
+
+    Here is the next step to type the email address into the
+    Email box:
+
+      commands:
+        - command: type
+          text: "gopal@criticalasset.com"
+
+not done yet!
+command='type' text='gopal@criticalasset.com'
+checking...
+    Confidence: 0%
+
+    Reasoning: The screenshot clearly shows that the "Email"
+    input box is still empty, and the cursor is hovering over
+    the "Email" placeholder. The email address "
+    gopal@criticalasset.com (mailto:gopal@criticalasset.com)"
+    has not been entered into the box. Previous attempts to
+    type have failed, so the input may not be focused
+    correctly.
+
+    Next, I will try to ensure the input is focused by
+    clicking the "Email" placeholder again, then immediately
+    type the email address.
+
+      commands:
+        - command: focus-application
+          name: "Google Chrome"
+        - command: hover-text
+          text: "Email"
+          description: Email input placeholder above the password field on the login form
+          action: click
+        - command: type
+          text: "gopal@criticalasset.com"
+
+not done yet!
+command='focus-application' name='Google Chrome'
+command='hover-text' text='Email' description='Email input placeholder above the password field on the login form' action='click'
+waiting for text: "Email"...
+"Email" found!
+thinking...
+command='click' x=593 y=335 action='click'
+command='type' text='gopal@criticalasset.com'
+checking...
+    Confidence: 100%
+
+    The task is complete. In the most recent screenshot, the
+    "Email" input box contains the text "
+    gopal@criticalasset.com (mailto:gopal@criticalasset.com)"
+    as required. No further action is needed.
+
+success!
+> -prompt: In password box type "mh29AR@#0915"
+
+thinking...
+    I can see the CriticalAsset login screen in Google Chrome.
+    The "Email" field is filled, and the "Password" field is
+    directly below it, with the placeholder "Password"
+    visible. The best way to focus the password input is to
+    click on the "Password" placeholder text, then type the
+    password.
+
+      commands:
+        - command: focus-application
+          name: "Google Chrome"
+        - command: hover-text
+          text: "Password"
+          description: Password input placeholder below the email field on the login form
+          action: click
+        - command: type
+          text: "mh29AR@#0915"
+
+command='focus-application' name='Google Chrome'
+command='hover-text' text='Password' description='Password input placeholder below the email field on the login form' action='click'
+waiting for text: "Password"...
+"Password" found!
+thinking...
+command='click' x=610 y=402 action='click'
+command='type' text='mh29AR@#0915'
+checking...
+    Confidence: 100%
+
+    The task is complete. In the most recent screenshot, the
+    password box contains a masked password (dots), and the
+    mouse cursor is positioned over the password field. This
+    indicates that the password "mh29AR@#0915" has been
+    entered into the password box as requested. No further
+    action is needed.
+
+success!
+> -prompt: Click on "SIGN IN" button in yellow color
+
+thinking...
+    I can see the "SIGN IN" button in yellow color clearly
+    below the password field on the CriticalAsset login page
+    in Google Chrome. The best way to interact with it is to
+    click the "SIGN IN" text.
+
+      commands:
+        - command: focus-application
+          name: "Google Chrome"
+        - command: hover-text
+          text: "SIGN IN"
+          description: Yellow SIGN IN button below the password field on the login form
+          action: click
+
+command='focus-application' name='Google Chrome'
+command='hover-text' text='SIGN IN' description='Yellow SIGN IN button below the password field on the login form' action='click'
+waiting for text: "SIGN IN"...
+"SIGN IN" found!
+thinking...
+command='click' x=793 y=489 action='click'
+checking...
+    Confidence: 100%
+
+    The task is complete. In the second screenshot, the
+    CriticalAsset dashboard is visible, which means the "SIGN
+    IN" button was successfully clicked and the login was
+    successful. No further action is needed.
+
+success!
+>
